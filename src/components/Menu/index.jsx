@@ -1,13 +1,13 @@
 import styled from 'styled-components';
+import Logo from '../Logo'; // Importando a logo
 
 const HeaderContainer = styled.header`
   display: flex;
-  flex-direction: column; /* Organiza os itens na vertical */
   align-items: center;
   background-color: #20232a;
-  padding: 10px;
-  width: 10vw; /* Ajustei para evitar sobreposição de texto */
-  height: auto; /* Altura dinâmica conforme os itens adicionados */
+  padding: 10px 20px;
+  width: 100vw;
+  height: auto;
 `;
 
 const NavList = styled.ul`
@@ -16,25 +16,24 @@ const NavList = styled.ul`
   margin: 0;
   width: 100%;
   display: flex;
-  flex-direction: column;
+  justify-content: space-around; /* Distribui os itens igualmente */
   align-items: center;
 `;
 
 const NavItem = styled.li`
-  padding: 15px;
+  padding: 10px 15px;
   font-size: 1rem;
   color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  text-align: center;
-  width: 70%;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 
   &:hover {
     background-color: #61dafb;
     color: #20232a;
     transform: scale(1.1);
+    border-radius: 5px;
   }
 `;
 
@@ -43,6 +42,7 @@ const textOptions = ['Home', 'Books', 'Authors', 'Genres', 'News'];
 function Menu() {
   return (
     <HeaderContainer>
+      <Logo /> {/* A logo ficará ao lado esquerdo */}
       <NavList>
         {textOptions.map((text, index) => (
           <NavItem key={index}>{text}</NavItem>
