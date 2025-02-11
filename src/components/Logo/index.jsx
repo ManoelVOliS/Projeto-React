@@ -5,7 +5,7 @@ const LogoContainer = styled.div`
     align-items: center;          
     background-color: #3f444e;
     padding: 10px 10px;
-    width: 6vw;
+    width: 6 vw;
     height: auto;
     border-radius: 100px;
 `;

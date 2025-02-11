@@ -1,12 +1,23 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { useState } from "react";
+import { books } from "../Search/databaseSearch";
+
+const fadeInUp = keyframes`
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`;
 
 const SearchContainer = styled.section`
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 100px;
-    flex-direction: column; /* Organizar o conteúdo em coluna */
+    padding: 50px;
 `;
 
 const SearchInput = styled.input`
@@ -25,30 +36,71 @@ const SearchInput = styled.input`
     }
 `;
 
-const SearchText = styled.p`
-    margin-top: 20px;
-    font-size: 1.2rem;
-    color: #333; /* Cor do texto */
-    font-weight: bold;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
+// Container dos resultados em grid
+const BooksGrid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    width: 80%;
+    max-width: 1000px;
+`;
 
-    &:empty {
-        display: none; /* Ocultar o texto caso esteja vazio */
+const BookCard = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: ${fadeInUp} 0.5s ease-in-out;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
     }
 `;
 
+const BookImage = styled.img`
+    width: 120px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+`;
+
+const BookTitle = styled.p`
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+`;
+
 function Search() {
-    const [searchText, setSearchText] = useState("");
+    const [searchBooks, setSearchBooks] = useState([]);
 
     return (
         <SearchContainer>
             <SearchInput 
                 type="search" 
                 placeholder="Buscar..." 
-                onBlur={event => setSearchText(event.target.value)} 
+                onBlur={event => {
+                    const typingText = event.target.value.toLowerCase();
+                    const resultSearch = books.filter(book => 
+                        book.name.toLowerCase().includes(typingText)
+                    );
+                    setSearchBooks(resultSearch);
+                }} 
             />
-            <SearchText>{searchText}</SearchText>
+            
+            <BooksGrid>
+                {searchBooks.map(book => (
+                    <BookCard key={book.name}>
+                        <BookImage src={book.src} alt={book.name} />
+                        <BookTitle>{book.name}</BookTitle>
+                    </BookCard>
+                ))}
+            </BooksGrid>
         </SearchContainer>
     );
 }
