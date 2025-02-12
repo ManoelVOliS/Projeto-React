@@ -5,9 +5,14 @@ const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   background-color: #20232a;
-  padding: 10px 20px;
+  padding: 20px 40px;
   width: 100vw;
   height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra */
+`;
+
+const LogoWrapper = styled.div`
+  margin-right: 40px; /* Espaçamento entre a logo e o menu */
 `;
 
 const NavList = styled.ul`
@@ -16,24 +21,25 @@ const NavList = styled.ul`
   margin: 0;
   width: 100%;
   display: flex;
-  justify-content: space-around; /* Distribui os itens igualmente */
+  justify-content: space-around;
   align-items: center;
 `;
 
 const NavItem = styled.li`
-  padding: 10px 15px;
+  padding: 10px 20px;
   font-size: 1rem;
   color: #ffffff;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  border-radius: 10px;
+  transition: all 0.3s ease-in-out;
 
   &:hover {
-    background-color: #61dafb;
+    background-color:rgb(255, 255, 255);
     color: #20232a;
-    transform: scale(1.1);
-    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(226, 227, 228, 0.6); /* Sombra ao passar o mouse */
+    transform: translateY(-5px);
   }
 `;
 
@@ -42,7 +48,9 @@ const textOptions = ['Home', 'Books', 'Authors', 'Genres', 'News'];
 function Menu() {
   return (
     <HeaderContainer>
-      <Logo /> {/* A logo ficará ao lado esquerdo */}
+      <LogoWrapper>
+        <Logo /> {/* A logo ficará ao lado esquerdo */}
+      </LogoWrapper>
       <NavList>
         {textOptions.map((text, index) => (
           <NavItem key={index}>{text}</NavItem>

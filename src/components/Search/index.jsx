@@ -31,8 +31,8 @@ const SearchInput = styled.input`
     transition: all 0.3s ease-in-out;
 
     &:focus {
-        border-color: #61dafb;
-        box-shadow: 0 0 8px rgba(97, 218, 251, 0.6);
+        border-color:rgb(255, 255, 255);
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
     }
 `;
 
@@ -96,7 +96,7 @@ function Search() {
             <BooksGrid>
                 {searchBooks.map(book => (
                     <BookCard key={book.name}>
-                        <BookImage src={book.src} alt={book.name} />
+                        <BookImage src={book.src || "https://via.placeholder.com/100x150"} alt={book.name} />
                         <BookTitle>{book.name}</BookTitle>
                     </BookCard>
                 ))}
